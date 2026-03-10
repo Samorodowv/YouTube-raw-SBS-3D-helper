@@ -9,6 +9,10 @@
 
   let desiredEnabled = true;
   let currentVideoId = "";
+  let lastSupportVideoId = "";
+  let lastKnownSupported = false;
+  let playbackVideo = null;
+  let playbackPlayer = null;
   let mutationObserver = null;
   let routeObserver = null;
   let refreshTimer = null;
@@ -160,23 +164,6 @@
     });
   }
 
-  function getButtonContainer(player) {
-    const containers = [
-      ".ytp-right-controls",
-      ".ytp-chrome-controls .ytp-right-controls",
-      ".ytp-chrome-bottom .ytp-right-controls"
-    ];
-
-    for (const selector of containers) {
-      const match = player.querySelector(selector);
-      if (match instanceof HTMLElement) {
-        return match;
-      }
-    }
-
-    return null;
-  }
-
   function getButton(player) {
     const button = player.querySelector(`#${BUTTON_ID}`);
     return button instanceof HTMLButtonElement ? button : null;
@@ -184,6 +171,16 @@
 
   function buttonLabel(enabled) {
     return enabled ? "SBS ON" : "SBS OFF";
+  }
+
+  function setButtonVisibility(player, hidden) {
+    const button = getButton(player);
+    if (!button) {
+      return;
+    }
+
+    button.classList.toggle("yt-sbs-force-button-hidden", hidden);
+    button.setAttribute("aria-hidden", hidden ? "true" : "false");
   }
 
   function updateButton(player, supported, enabled) {
@@ -197,9 +194,79 @@
       ? `Raw SBS ${enabled ? "enabled" : "disabled"}`
       : "No raw-video canvas pair detected on this page";
     button.setAttribute("aria-pressed", supported && enabled ? "true" : "false");
-    button.disabled = !supported;
+    button.setAttribute("aria-disabled", !supported ? "true" : "false");
     button.classList.toggle("yt-sbs-force-button-active", supported && enabled);
     button.classList.toggle("yt-sbs-force-button-disabled", !supported);
+  }
+
+  function syncPlaybackVisibility() {
+    if (!playbackPlayer) {
+      return;
+    }
+
+    const video = playbackVideo || getActiveVideo(playbackPlayer);
+    const hidden = Boolean(video && !video.paused && !video.ended);
+    setButtonVisibility(playbackPlayer, hidden);
+  }
+
+  function detachPlaybackTracking() {
+    if (!playbackVideo) {
+      playbackPlayer = null;
+      return;
+    }
+
+    const events = ["play", "pause", "ended", "emptied"];
+    for (const name of events) {
+      playbackVideo.removeEventListener(name, syncPlaybackVisibility, true);
+    }
+
+    playbackVideo = null;
+    playbackPlayer = null;
+  }
+
+  function attachPlaybackTracking(player) {
+    const video = getActiveVideo(player);
+    if (!video) {
+      detachPlaybackTracking();
+      setButtonVisibility(player, false);
+      return;
+    }
+
+    if (video === playbackVideo && player === playbackPlayer) {
+      syncPlaybackVisibility();
+      return;
+    }
+
+    detachPlaybackTracking();
+    playbackVideo = video;
+    playbackPlayer = player;
+
+    const events = ["play", "pause", "ended", "emptied"];
+    for (const name of events) {
+      playbackVideo.addEventListener(name, syncPlaybackVisibility, true);
+    }
+
+    syncPlaybackVisibility();
+  }
+
+  function getSupportedState(player) {
+    const videoId = getPageVideoId();
+    if (!isWatchPage() || !videoId) {
+      lastSupportVideoId = videoId;
+      lastKnownSupported = false;
+      return false;
+    }
+
+    if (videoId !== lastSupportVideoId) {
+      lastSupportVideoId = videoId;
+      lastKnownSupported = false;
+    }
+
+    if (isCandidate3DPlayer(player)) {
+      lastKnownSupported = true;
+    }
+
+    return lastKnownSupported;
   }
 
   function injectButton(player) {
@@ -208,28 +275,36 @@
       return existing;
     }
 
-    const container = getButtonContainer(player);
-    if (!container) {
-      return null;
-    }
-
     const button = document.createElement("button");
     button.id = BUTTON_ID;
-    button.className = "ytp-button yt-sbs-force-button";
+    button.className = "yt-sbs-force-button";
     button.type = "button";
     button.textContent = buttonLabel(desiredEnabled);
     button.title = "Toggle raw SBS mode";
     button.setAttribute("aria-label", "Toggle raw SBS mode");
     button.setAttribute("aria-pressed", "false");
+    button.tabIndex = 0;
+    button.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      event.stopPropagation();
+    }, true);
     button.addEventListener("click", async (event) => {
       event.preventDefault();
+      event.stopImmediatePropagation();
       event.stopPropagation();
+      const activePlayer = getPlayer();
+      if (!activePlayer || !getSupportedState(activePlayer)) {
+        refresh();
+        return;
+      }
+
       desiredEnabled = !desiredEnabled;
       await storageSet({ [STATE_KEY]: desiredEnabled });
-      applyState(player);
-    });
+      refresh();
+    }, true);
 
-    container.prepend(button);
+    player.append(button);
     return button;
   }
 
@@ -241,10 +316,11 @@
   }
 
   function applyState(player) {
-    const supported = isWatchPage() && isCandidate3DPlayer(player);
+    const supported = getSupportedState(player);
     injectButton(player);
     applyPlayerClass(player, supported);
     updateButton(player, supported, desiredEnabled);
+    attachPlaybackTracking(player);
     log("apply state", {
       supported,
       enabled: desiredEnabled,
@@ -286,6 +362,8 @@
       const nextVideoId = getPageVideoId();
       if (nextVideoId !== currentVideoId) {
         currentVideoId = nextVideoId;
+        lastSupportVideoId = nextVideoId;
+        lastKnownSupported = false;
         log("route change detected", currentVideoId);
         refresh();
       }

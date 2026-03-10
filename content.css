@@ -22,16 +22,45 @@
 }
 
 .yt-sbs-force-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2147483647;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 74px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid rgba(154, 231, 255, 0.32);
+  border-radius: 999px;
+  background: rgba(7, 26, 38, 0.9);
+  color: #e8fbff;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.08em;
-  min-width: 40px;
+  line-height: 1;
+  cursor: pointer;
+  pointer-events: auto !important;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .yt-sbs-force-button.yt-sbs-force-button-active {
   color: #61dafb !important;
+  border-color: rgba(97, 218, 251, 0.55) !important;
 }
 
 .yt-sbs-force-button.yt-sbs-force-button-disabled {
   opacity: 0.45 !important;
+  cursor: not-allowed !important;
+}
+
+.yt-sbs-force-button:hover {
+  background: rgba(14, 49, 68, 0.96);
+}
+
+.yt-sbs-force-button.yt-sbs-force-button-hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
