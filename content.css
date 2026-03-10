@@ -70,8 +70,7 @@
   pointer-events: none !important;
 }
 
-#movie_player.playing-mode:hover .yt-sbs-force-button,
-#movie_player.playing-mode.ytp-autohide:hover .yt-sbs-force-button,
+#movie_player.playing-mode:not(.ytp-autohide) .yt-sbs-force-button,
 #movie_player.paused-mode .yt-sbs-force-button,
 #movie_player.ended-mode .yt-sbs-force-button {
   opacity: 1 !important;
