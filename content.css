@@ -1,0 +1,37 @@
+#movie_player.yt-sbs-force-enabled .html5-video-container canvas,
+#movie_player.yt-sbs-force-enabled .html5-video-container [data-layer="0"] canvas,
+#movie_player.yt-sbs-force-enabled .html5-video-container .webgl,
+#movie_player.yt-sbs-force-enabled .html5-video-container .ytp-webgl-canvas {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+#movie_player.yt-sbs-force-enabled .html5-video-container video,
+#movie_player.yt-sbs-force-enabled .html5-video-container .video-stream,
+#movie_player.yt-sbs-force-enabled .html5-video-container .html5-main-video {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+#movie_player.yt-sbs-force-enabled .html5-video-container {
+  background: #000 !important;
+}
+
+.yt-sbs-force-button {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  min-width: 40px;
+}
+
+.yt-sbs-force-button.yt-sbs-force-button-active {
+  color: #61dafb !important;
+}
+
+.yt-sbs-force-button.yt-sbs-force-button-disabled {
+  opacity: 0.45 !important;
+}
