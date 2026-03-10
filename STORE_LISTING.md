@@ -41,9 +41,9 @@ English
 
 ## URLs
 
-- Homepage: `https://github.com/Samorodowv/YouTube-raw-SBS-3D-helper`
-- Support: `https://github.com/Samorodowv/YouTube-raw-SBS-3D-helper/issues`
-- Privacy policy: `https://github.com/Samorodowv/YouTube-raw-SBS-3D-helper/blob/main/PRIVACY.md`
+- Homepage: `https://samorodowv.github.io/YouTube-raw-SBS-3D-helper/`
+- Support: `https://samorodowv.github.io/YouTube-raw-SBS-3D-helper/support.html`
+- Privacy policy: `https://samorodowv.github.io/YouTube-raw-SBS-3D-helper/privacy.html`
 
 ## Required Store Media
 

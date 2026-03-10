@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YouTube raw SBS/3D helper</title>
+    <meta name="description" content="Chrome extension that restores the raw SBS or top-bottom 3D stream on supported YouTube watch pages.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="hero">
+        <div class="hero-card">
+          <div class="eyebrow">Chrome Extension</div>
+          <h1>YouTube raw SBS/3D helper</h1>
+          <p class="lede">
+            Restore the raw SBS or top-bottom 3D stream on supported YouTube watch pages by hiding the processed canvas layer and surfacing the underlying video element.
+          </p>
+          <div class="badge-row">
+            <span class="badge">Chrome-first</span>
+            <span class="badge">Local player-only</span>
+            <span class="badge">No remote code</span>
+            <span class="badge">No data collection</span>
+          </div>
+          <div class="nav">
+            <a class="button primary" href="support.html">Support</a>
+            <a class="button secondary" href="privacy.html">Privacy policy</a>
+            <a class="button secondary" href="https://github.com/Samorodowv/YouTube-raw-SBS-3D-helper">GitHub</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section grid">
+        <article class="panel">
+          <h2>What it does</h2>
+          <p>
+            On supported YouTube watch pages, the extension detects the active player, finds the raw HTML5 video element and the processed canvas layer, and switches the local presentation back to the raw stereo stream.
+          </p>
+        </article>
+        <article class="panel">
+          <h2>What it does not do</h2>
+          <p>
+            It does not download, re-encode, or upload video. It does not change YouTube data on the server. It only adjusts the local player DOM in your browser.
+          </p>
+        </article>
+        <article class="panel">
+          <h2>Current scope</h2>
+          <p>
+            The extension is designed for historical YouTube 3D uploads where the raw SBS or top-bottom stream is still present in the page player structure.
+          </p>
+        </article>
+      </section>
+
+      <section class="section">
+        <div class="panel">
+          <h2>How to use it</h2>
+          <ul>
+            <li>Install the unpacked or published Chrome extension.</li>
+            <li>Open a supported YouTube watch page.</li>
+            <li>The extension enables SBS mode automatically when it detects a compatible player structure.</li>
+            <li>Use the in-player <span class="code">SBS ON</span> or <span class="code">SBS OFF</span> control to override the current page state.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="foot">
+        <p>
+          Support and bug reports: <a href="support.html">support page</a> or <a href="https://github.com/Samorodowv/YouTube-raw-SBS-3D-helper/issues">GitHub issues</a>.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

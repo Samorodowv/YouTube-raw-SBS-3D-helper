@@ -3,7 +3,7 @@
   "name": "YouTube raw SBS/3D helper",
   "version": "0.2.0",
   "description": "Restores the raw SBS or top-bottom 3D stream on supported YouTube watch pages.",
-  "homepage_url": "https://github.com/Samorodowv/YouTube-raw-SBS-3D-helper",
+  "homepage_url": "https://samorodowv.github.io/YouTube-raw-SBS-3D-helper/",
   "permissions": [
     "storage"
   ],

@@ -1,0 +1,167 @@
+:root {
+  --bg: #071a26;
+  --panel: #0e3144;
+  --panel-2: #123c52;
+  --text: #e8fbff;
+  --muted: #9ae7ff;
+  --accent: #11a7b8;
+  --line: rgba(154, 231, 255, 0.18);
+  --max: 980px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top right, rgba(17, 167, 184, 0.18), transparent 28%),
+    linear-gradient(180deg, #071a26 0%, #08141d 100%);
+}
+
+a {
+  color: var(--muted);
+}
+
+.wrap {
+  width: min(calc(100% - 32px), var(--max));
+  margin: 0 auto;
+}
+
+.hero {
+  padding: 56px 0 24px;
+}
+
+.hero-card,
+.panel {
+  background: linear-gradient(180deg, rgba(14, 49, 68, 0.92), rgba(9, 30, 42, 0.96));
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+}
+
+.hero-card {
+  padding: 28px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 14px;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: clamp(32px, 6vw, 54px);
+}
+
+h2 {
+  font-size: 24px;
+}
+
+p,
+li {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.lede {
+  max-width: 700px;
+  color: #d4f6ff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin: 24px 0 48px;
+}
+
+.panel {
+  padding: 22px;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.nav a,
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid rgba(154, 231, 255, 0.24);
+}
+
+.button.primary {
+  background: var(--accent);
+  color: #05141d;
+  font-weight: 700;
+  border-color: transparent;
+}
+
+.button.secondary {
+  background: transparent;
+  color: var(--text);
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.badge {
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(17, 167, 184, 0.12);
+  border: 1px solid rgba(17, 167, 184, 0.3);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.section {
+  padding: 0 0 28px;
+}
+
+.section:last-child {
+  padding-bottom: 56px;
+}
+
+ul {
+  padding-left: 18px;
+}
+
+.foot {
+  padding: 0 0 48px;
+  color: #bfefff;
+}
+
+.code {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 13px;
+}

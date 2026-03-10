@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Support | YouTube raw SBS/3D helper</title>
+    <meta name="description" content="Support page for YouTube raw SBS/3D helper.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="hero">
+        <div class="hero-card">
+          <div class="eyebrow">Support</div>
+          <h1>Bug reports and reproducible cases</h1>
+          <p class="lede">
+            The fastest support path is a GitHub issue with a working YouTube URL and a short description of what the player did.
+          </p>
+          <div class="nav">
+            <a class="button primary" href="https://github.com/Samorodowv/YouTube-raw-SBS-3D-helper/issues">Open an issue</a>
+            <a class="button secondary" href="index.html">Back to site</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section grid">
+        <article class="panel">
+          <h2>Include in every report</h2>
+          <ul>
+            <li>The full YouTube URL</li>
+            <li>Whether the video is expected to be SBS or top-bottom</li>
+            <li>Your Chrome version</li>
+            <li>Whether the problem happens on reload or after in-site navigation</li>
+            <li>A console screenshot if there is an error</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h2>Known failure modes</h2>
+          <ul>
+            <li>YouTube changed player selectors or control markup.</li>
+            <li>The current page does not expose a raw video plus processed canvas pair.</li>
+            <li>Another extension is modifying the YouTube player UI or DOM.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section">
+        <div class="panel">
+          <h2>Scope</h2>
+          <p>
+            This extension only changes YouTube player presentation locally in the browser. It does not restore missing 3D metadata on YouTube and it does not alter the server-side video stream.
+          </p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

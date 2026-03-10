@@ -28,3 +28,7 @@ GitHub repository:
 Issue tracker:
 
 `https://github.com/Samorodowv/YouTube-raw-SBS-3D-helper/issues`
+
+Project website:
+
+`https://samorodowv.github.io/YouTube-raw-SBS-3D-helper/privacy.html`

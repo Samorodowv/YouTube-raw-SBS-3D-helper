@@ -6,6 +6,10 @@ Open an issue here:
 
 `https://github.com/Samorodowv/YouTube-raw-SBS-3D-helper/issues`
 
+Project support page:
+
+`https://samorodowv.github.io/YouTube-raw-SBS-3D-helper/support.html`
+
 Include:
 
 - The full YouTube URL
